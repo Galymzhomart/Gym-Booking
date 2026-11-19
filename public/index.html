@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>Gym Booking System</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/"><span class="brand-mark">G</span><span>GYM<span class="muted">BOOKING</span></span></a>
+      <div class="topbar-actions">
+        <label class="language-label" for="language-select" data-i18n="language">Язык</label>
+        <select id="language-select" aria-label="Language">
+          <option value="kk">Қазақша</option><option value="ru">Русский</option><option value="en">English</option>
+        </select>
+        <div id="user-area" class="user-area hidden">
+          <span id="user-label" class="user-label"></span>
+          <button id="logout-btn" class="button button-ghost" data-i18n="logout">Выйти</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="login-view" class="login-layout">
+      <div class="hero">
+        <p class="eyebrow" data-i18n="heroEyebrow">PERSONAL TRAINING · BOOKING</p>
+        <h1 data-i18n-html="heroTitle">Твоя тренировка.<br><span>Твоё время.</span></h1>
+        <p class="hero-copy" data-i18n="heroCopy">Выбирай свободное занятие, бронируй и управляй своими тренировками в одном месте.</p>
+        <div class="hero-points"><span data-i18n="point1">01 / Выбери время</span><span data-i18n="point2">02 / Подтверди запись</span><span data-i18n="point3">03 / Приходи на тренировку</span></div>
+      </div>
+      <form id="login-form" class="panel login-card">
+        <p class="eyebrow" data-i18n="welcomeBack">WELCOME BACK</p>
+        <h2 data-i18n="loginTitle">Войти в систему</h2>
+        <label><span data-i18n="username">Логин</span><input name="username" autocomplete="username" required maxlength="50" data-i18n-placeholder="usernamePlaceholder" placeholder="Введите логин"></label>
+        <label><span data-i18n="password">Пароль</span><input name="password" type="password" autocomplete="current-password" required data-i18n-placeholder="passwordPlaceholder" placeholder="Введите пароль"></label>
+        <button class="button button-primary full" type="submit"><span data-i18n="login">Войти</span><span>→</span></button>
+        <button id="forgot-password-link" class="text-link" type="button" data-i18n="forgotPassword">Забыли пароль?</button>
+        <p id="login-error" class="error-text" role="alert"></p>
+        <p class="small-note" data-i18n="demoNote">Демо-аккаунты и пароли указаны в README после запуска demo_seed.sql.</p>
+      </form>
+    </section>
+
+    <section id="forgot-view" class="login-layout hidden">
+      <div class="hero"><p class="eyebrow" data-i18n="accountRecovery">ACCOUNT RECOVERY</p><h1 data-i18n="forgotTitle">Восстановление пароля</h1><p class="hero-copy" data-i18n="forgotCopy">Укажите email, привязанный к аккаунту. Мы отправим ссылку для сброса пароля.</p></div>
+      <form id="forgot-form" class="panel login-card"><h2 data-i18n="forgotTitle">Восстановление пароля</h2>
+        <label><span>Email</span><input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+        <button class="button button-primary full" type="submit" data-i18n="sendResetLink">Отправить ссылку</button>
+        <p id="forgot-message" class="form-message" role="status"></p>
+        <button id="forgot-back" class="button button-ghost full" type="button" data-i18n="backToLogin">Вернуться ко входу</button>
+      </form>
+    </section>
+    <section id="reset-view" class="login-layout hidden">
+      <div class="hero"><p class="eyebrow" data-i18n="accountRecovery">ACCOUNT RECOVERY</p><h1 data-i18n="newPasswordTitle">Новый пароль</h1><p class="hero-copy" data-i18n="newPasswordCopy">Создайте новый пароль для своего аккаунта.</p></div>
+      <form id="reset-form" class="panel login-card"><h2 data-i18n="newPasswordTitle">Новый пароль</h2>
+        <label><span data-i18n="newPassword">Новый пароль</span><input name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="200"></label>
+        <label><span data-i18n="confirmPassword">Повторите пароль</span><input name="confirmPassword" type="password" autocomplete="new-password" required minlength="10" maxlength="200"></label>
+        <button class="button button-primary full" type="submit" data-i18n="savePassword">Сохранить пароль</button>
+        <p id="reset-message" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="twofa-view" class="login-layout hidden">
+      <div class="hero">
+        <p class="eyebrow" data-i18n="securityEyebrow">ACCOUNT SECURITY</p>
+        <h1 data-i18n="twofaHero">Подтвердите вход</h1>
+        <p class="hero-copy" data-i18n="twofaCopy">Введите одноразовый код, чтобы завершить вход в аккаунт.</p>
+      </div>
+      <form id="twofa-form" class="panel login-card">
+        <p class="eyebrow" data-i18n="secondStep">SECOND STEP</p>
+        <h2 data-i18n="twofaTitle">Двухфакторная проверка</h2>
+        <label><span data-i18n="otpCode">Код подтверждения</span><input name="code" inputmode="numeric" autocomplete="one-time-code" required maxlength="12" data-i18n-placeholder="otpPlaceholder" placeholder="Введите код"></label>
+        <button class="button button-primary full" type="submit"><span data-i18n="verify">Подтвердить</span><span>→</span></button>
+        <button id="back-to-login" class="button button-ghost full" type="button" data-i18n="backToLogin">Вернуться ко входу</button>
+        <p id="twofa-error" class="error-text" role="alert"></p>
+      </form>
+    </section>
+
+    <section id="app-view" class="hidden">
+      <div class="welcome-row">
+        <div><p class="eyebrow">YOUR TRAINING SPACE</p><h1 id="welcome-title">Бронирования</h1><p id="welcome-copy" class="subcopy">Управляй своими занятиями и следи за расписанием.</p></div>
+        <div class="date-chip"><span class="live-dot"></span><span data-i18n="dbConnected">PostgreSQL connected</span></div>
+      </div>
+      <nav class="tabs" aria-label="Sections">
+        <button class="tab active" data-tab="available" data-i18n="availableSessions">Свободные занятия</button>
+        <button class="tab" data-tab="bookings" data-i18n="bookings">Бронирования</button>
+      </nav>
+      <div id="notice" class="notice hidden" role="status"></div>
+      <section id="progress-panel" class="progress-panel hidden">
+        <div class="progress-top"><div><p class="eyebrow" data-i18n="myProgress">МОЙ ПРОГРЕСС</p><h2 data-i18n="weeklyProgress">Прогресс за неделю</h2></div><strong id="progress-label">0 из 4</strong></div>
+        <div class="progress-track"><span id="progress-fill"></span></div>
+      </section>
+      <section id="available-panel">
+        <div class="section-heading"><div><h2 data-i18n="chooseTraining">Выбери тренировку</h2><p data-i18n="futureSessions">Показываются будущие занятия активных тренеров.</p></div><div class="schedule-actions"><label class="filter-label"><input id="only-available" type="checkbox"> <span data-i18n="onlyAvailableToMe">Только доступные мне</span></label><button id="refresh-sessions" class="button button-ghost" data-i18n="refresh">Обновить ↻</button></div></div>
+        <div id="sessions-list" class="cards-grid"></div>
+      </section>
+      <section id="bookings-panel" class="hidden">
+        <div class="section-heading"><div><h2 id="bookings-heading">Мои бронирования</h2><p data-i18n="cancelledHistory">Отменённые записи остаются в истории.</p></div><button id="refresh-bookings" class="button button-ghost" data-i18n="refresh">Обновить ↻</button></div>
+        <div id="bookings-list" class="booking-list"></div>
+      </section>
+    </section>
+    <footer>GYM BOOKING SYSTEM <span>·</span> PostgreSQL</footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
